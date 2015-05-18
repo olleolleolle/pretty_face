@@ -3,7 +3,7 @@ Feature: pretty face report
   Background:
     When I run `cucumber fixtures --profile fixture`
 
-  Scenario: Cucumber crefates an html report
+  Scenario: Cucumber creates an html report
     Then the following files should exist:
     | results/fixture.html |
 

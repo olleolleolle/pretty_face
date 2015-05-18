@@ -234,7 +234,7 @@ module PrettyFace
         report_step = ReportStep.new(step)
         report_step.duration = duration
         report_step.status = status unless status.nil?
-        if step.background?
+        if !!step.background
           @report.current_feature.background << report_step if @report.processing_background_steps?
         else
           @report.add_step report_step
@@ -252,9 +252,9 @@ module PrettyFace
         false
       end
 
-      def step_belongs_to_outline?(step)
-        scenario = step.instance_variable_get "@feature_element"
-        not scenario.nil?
+      def step_belongs_to_outline?(step_invocation)
+        scenario = step_invocation.step.instance_variable_get "@feature_element"
+        !scenario.nil?
       end
 
       def build_scenario_outline_steps(example_row)

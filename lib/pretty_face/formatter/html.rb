@@ -107,7 +107,7 @@ module PrettyFace
           @report.current_scenario.populate(example_row)
           build_scenario_outline_steps(example_row)
         end
-        populate_cells(example_row) if example_row.instance_of? Cucumber::Ast::Table::Cells
+        populate_cells(example_row) if example_row.instance_of? Cucumber::Core::Ast::DataTable
       end
 
       def before_step(step)
@@ -243,12 +243,12 @@ module PrettyFace
       end
 
       def scenario_outline?(feature_element)
-        feature_element.is_a? Cucumber::Ast::ScenarioOutline
+        feature_element.is_a? Cucumber::Core::Ast::ScenarioOutline
       end
 
       def info_row?(example_row)
         return example_row.scenario_outline.nil? if example_row.respond_to? :scenario_outline
-        return true if example_row.instance_of? Cucumber::Ast::Table::Cells
+        return true if example_row.instance_of? Cucumber::Core::Ast::DataTable
         false
       end
 

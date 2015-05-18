@@ -174,10 +174,10 @@ module PrettyFace
 
       def populate(scenario)
         @duration = Time.now - @start
-        if scenario.instance_of? Cucumber::Ast::Scenario
+        if scenario.instance_of? Cucumber::Core::Ast::Scenario
           @name = scenario.name
           @file_colon_line = scenario.file_colon_line
-        elsif scenario.instance_of? Cucumber::Ast::OutlineTable::ExampleRow
+        elsif scenario.instance_of? Cucumber::Core::Ast::ExamplesTable::Row
           @name = scenario.scenario_outline.name
           @file_colon_line = scenario.backtrace_line
         end
@@ -195,7 +195,7 @@ module PrettyFace
       def initialize(step)
         @name = step.name
         @file_colon_line = step.file_colon_line
-        unless step.instance_of? Cucumber::Ast::Background
+        unless step.instance_of? Cucumber::Core::Ast::Background
           if step.respond_to? :actual_keyword
             @keyword = step.actual_keyword
           else

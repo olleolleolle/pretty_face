@@ -49,6 +49,7 @@ module PrettyFace
       private
 
       def get_average_from_float_array(arr)
+        return 0 if arr.size == 0
         arr.reduce(:+).to_f / arr.size
       end
 

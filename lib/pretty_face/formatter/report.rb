@@ -89,7 +89,7 @@ module PrettyFace
         @scenarios = []
         @background = []
         @start_time = Time.now
-        @description = feature.description
+        @description = feature.send(:description)
         @parent_filename = parent_filename
       end
 

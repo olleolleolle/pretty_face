@@ -9,11 +9,11 @@ module PrettyFace
       end
 
       def step_count
-        @step_mother.steps.length
+        @runtime.steps.length
       end
 
       def scenario_count
-        @step_mother.scenarios.length
+        @runtime.scenarios.length
       end
 
       def total_duration
@@ -34,11 +34,11 @@ module PrettyFace
       end
 
       def scenarios_summary_for(status)
-        summary_percent(@step_mother.scenarios(status).length, scenario_count)
+        summary_percent(@runtime.scenarios(status).length, scenario_count)
       end
 
       def steps_summary_for(status)
-        summary_percent(@step_mother.steps(status).length, step_count)
+        summary_percent(@runtime.steps(status).length, step_count)
       end
 
       def failed_scenario?(scenario)

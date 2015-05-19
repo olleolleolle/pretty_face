@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'cucumber/core/ast/step'
 
 describe PrettyFace::Formatter::Html do
-  let(:step_mother) { double('step_mother') }
-  let(:formatter) { Html.new(step_mother, nil, nil) }
+  let(:runtime) { double('runtime') }
+  let(:formatter) { Html.new(runtime, nil, nil) }
   let(:parameter) { double('parameter') }
   let(:step) { Cucumber::Ast::Step.new(1, 'Given', 'A cucumber Step') }
 
@@ -28,74 +28,74 @@ describe PrettyFace::Formatter::Html do
 
   context "when building the report for scenarios" do
     it "should track number of scenarios" do
-      expect(step_mother).to receive(:scenarios).and_return([1,2,3])
+      expect(runtime).to receive(:scenarios).and_return([1,2,3])
       expect(formatter.scenario_count).to eql 3
     end
 
     it "should keep track of passing scenarios" do
-      expect(step_mother).to receive(:scenarios).with(:passed).and_return([1,2])
-      expect(step_mother).to receive(:scenarios).and_return([1,2])
+      expect(runtime).to receive(:scenarios).with(:passed).and_return([1,2])
+      expect(runtime).to receive(:scenarios).and_return([1,2])
       expect(formatter.scenarios_summary_for(:passed)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
 
     it "should keep track of failing scenarios" do
-      expect(step_mother).to receive(:scenarios).with(:failed).and_return([1,2])
-      expect(step_mother).to receive(:scenarios).and_return([1,2])
+      expect(runtime).to receive(:scenarios).with(:failed).and_return([1,2])
+      expect(runtime).to receive(:scenarios).and_return([1,2])
       expect(formatter.scenarios_summary_for(:failed)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
 
     it "should keep track of pending scenarios" do
-      expect(step_mother).to receive(:scenarios).with(:pending).and_return([1,2])
-      expect(step_mother).to receive(:scenarios).and_return([1,2])
+      expect(runtime).to receive(:scenarios).with(:pending).and_return([1,2])
+      expect(runtime).to receive(:scenarios).and_return([1,2])
       expect(formatter.scenarios_summary_for(:pending)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
 
     it "should keep track of undefined scenarios" do
-      expect(step_mother).to receive(:scenarios).with(:undefined).and_return([1,2])
-      expect(step_mother).to receive(:scenarios).and_return([1,2])
+      expect(runtime).to receive(:scenarios).with(:undefined).and_return([1,2])
+      expect(runtime).to receive(:scenarios).and_return([1,2])
       expect(formatter.scenarios_summary_for(:undefined)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
 
     it "should keep track of skipped scenarios" do
-      expect(step_mother).to receive(:scenarios).with(:skipped).and_return([1,2])
-      expect(step_mother).to receive(:scenarios).and_return([1,2])
+      expect(runtime).to receive(:scenarios).with(:skipped).and_return([1,2])
+      expect(runtime).to receive(:scenarios).and_return([1,2])
       expect(formatter.scenarios_summary_for(:skipped)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
   end
 
   context "when building the report for steps" do
     it "should track number of steps" do
-      expect(step_mother).to receive(:steps).and_return([1,2])
+      expect(runtime).to receive(:steps).and_return([1,2])
       expect(formatter.step_count).to eql 2
     end
 
     it "should keep track of passing steps" do
-      expect(step_mother).to receive(:steps).with(:passed).and_return([1,2])
-      expect(step_mother).to receive(:steps).and_return([1,2])
+      expect(runtime).to receive(:steps).with(:passed).and_return([1,2])
+      expect(runtime).to receive(:steps).and_return([1,2])
       expect(formatter.steps_summary_for(:passed)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
 
     it "should keep track of failing steps" do
-      expect(step_mother).to receive(:steps).with(:failed).and_return([1,2])
-      expect(step_mother).to receive(:steps).and_return([1,2])
+      expect(runtime).to receive(:steps).with(:failed).and_return([1,2])
+      expect(runtime).to receive(:steps).and_return([1,2])
       expect(formatter.steps_summary_for(:failed)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
 
     it "should keep track of skipped steps" do
-      expect(step_mother).to receive(:steps).with(:skipped).and_return([1,2])
-      expect(step_mother).to receive(:steps).and_return([1,2])
+      expect(runtime).to receive(:steps).with(:skipped).and_return([1,2])
+      expect(runtime).to receive(:steps).and_return([1,2])
       expect(formatter.steps_summary_for(:skipped)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
 
     it "should keep track of pending steps" do
-      expect(step_mother).to receive(:steps).with(:pending).and_return([1,2])
-      expect(step_mother).to receive(:steps).and_return([1,2])
+      expect(runtime).to receive(:steps).with(:pending).and_return([1,2])
+      expect(runtime).to receive(:steps).and_return([1,2])
       expect(formatter.steps_summary_for(:pending)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
 
     it "should keep track of undefined steps" do
-      expect(step_mother).to receive(:steps).with(:undefined).and_return([1,2])
-      expect(step_mother).to receive(:steps).and_return([1,2])
+      expect(runtime).to receive(:steps).with(:undefined).and_return([1,2])
+      expect(runtime).to receive(:steps).and_return([1,2])
       expect(formatter.steps_summary_for(:undefined)).to eql "2 <span class=\"percentage\">(100.0%)</span>"
     end
   end

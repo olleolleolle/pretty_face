@@ -22,11 +22,13 @@ module PrettyFace
 
       attr_reader :report, :logo
 
-      def initialize(step_mother, path_or_io, options)
+      # Olle TODO: https://github.com/cucumber/cucumber/commits/master/lib/cucumber/formatter/html.rb
+
+      def initialize(runtime, path_or_io, options)
         @path = path_or_io
         set_path_and_file(path_or_io)
         @path_to_erb = File.join(File.dirname(__FILE__), '..', 'templates')
-        @step_mother = step_mother
+        @runtime = runtime
         @options = options
         # The expand option is set to true by RubyMine and cannot be turned off using the IDE. This option causes
         # a test run while using this gem to terminate.
